@@ -16,12 +16,17 @@ export class CreateUserService {
 
         const passwordHash = await hash(password, 8);
 
-        const user = await this.userRepository.create({
+        const data: Prisma.UserCreateInput = {
             name,
             email,
             password: passwordHash,
-            role
-        })
+        };
+
+        if (role !== undefined) {
+            data.role = role;
+        }
+
+        const user = await this.userRepository.create(data);
 
         return user;
 
