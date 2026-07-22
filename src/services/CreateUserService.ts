@@ -4,7 +4,7 @@ import { hash } from "bcryptjs";
 
 export class CreateUserService {
 
-    constructor(private userRepository: IUserRepository) {}
+    constructor(private userRepository: IUserRepository) {};
 
     async execute({ name, email, password, role }: Prisma.UserCreateInput) {
 

@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { UserController } from "../controllers/UserController.js";
 
-const userRoutes = Router();
+const sessionRoutes = Router();
 const userController = new UserController();
 
-userRoutes.post('/', userController.create)
+sessionRoutes.post('/', userController.authenticate);
 
-export { userRoutes };
+export { sessionRoutes };
