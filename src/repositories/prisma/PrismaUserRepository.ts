@@ -20,4 +20,10 @@ export class PrismaUserRepository implements IUserRepository {
             data,
         });
     }
+
+    async findAllProviders(): Promise<User[]> {
+        return await prisma.user.findMany({
+            where: { role: "PROVIDER" }
+        })
+    }
 }
