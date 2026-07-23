@@ -25,5 +25,23 @@ model User {
   role         UserRole @default(CUSTOMER)
   created_at   DateTime @default(now())
 
+  appointmentsAsCustomer Appointment[] @relation("CustomerAppointments")
+  appointmentsAsProvider Appointment[] @relation("ProviderAppointments")
+
   @@map("users")
+}
+
+model Appointment {
+  id            String    @id @default(uuid())
+  date          DateTime
+
+  provider      User @relation("ProviderAppointments", fields: [provider_id], references: [id])
+  provider_id   String
+
+  customer      User @relation("CustomerAppointments", fields: [customer_id], references: [id])
+  customer_id   String
+
+  created_at    DateTime  @default(now())
+
+  @@map("appointments")
 }
